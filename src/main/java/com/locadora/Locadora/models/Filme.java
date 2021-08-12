@@ -1,7 +1,6 @@
 package com.locadora.Locadora.models;
 
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="TB_FILME")
 
-public class Filme   {
+public class Filme{
 	
 	
 	@Id

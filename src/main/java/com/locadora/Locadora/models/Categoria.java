@@ -12,15 +12,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name="TB_Categoria")
 public class Categoria {
-	
-		
 		
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name= "id")
 		private int id;
 
-		@Column(name="nome")
+		@Column(name="nome", nullable = false)
 		private String nome;
 	}
 
