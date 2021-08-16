@@ -11,8 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+@Getter
+@Setter
+@AllArgsConstructor
 @Entity
 @Table(name="TB_FILME")
 

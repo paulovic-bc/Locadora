@@ -24,30 +24,6 @@ public class Autor implements Serializable  {
 	
 	private static final long serialVersionUID = 1L;
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getNasc() {
-		return nasc;
-	}
-
-	public void setNasc(String nasc) {
-		this.nasc = nasc;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
