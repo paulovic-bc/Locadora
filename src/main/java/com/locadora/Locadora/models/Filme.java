@@ -35,30 +35,6 @@ public class Filme implements Serializable{
 	public Autor autor;
 	@ManyToOne
 	public Categoria categoria;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getAno() {
-		return ano;
-	}
-
-	public void setAno(String ano) {
-		this.ano = ano;
-	}
 	
 
 }
