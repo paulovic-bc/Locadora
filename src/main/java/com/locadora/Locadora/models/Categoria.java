@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,10 +24,16 @@ public class Categoria implements Serializable {
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name= "id")
+		@Column(name= "Id")
 		public long id;
 
-		@Column(name="nome", nullable = false)
-		public String nome;
+		@Column(name="Nome", nullable = false)
+		public String nome_categoria;
+
+		@Column(name="Tag", nullable = false)
+		public String tag_categoria;
+		
+		@Column(name="Idioma", nullable = false)
+		public String idioma_categoria;
 	}
 

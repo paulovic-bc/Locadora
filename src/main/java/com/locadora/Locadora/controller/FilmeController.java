@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.locadora.Locadora.service.FilmeService;
 import com.locadora.Locadora.models.Filme;
+
+
 @RestController
 @RequestMapping(value="/api")
 public class FilmeController {
 
 	@Autowired
 	FilmeService  filmeService;
+	
+
 	
 	@GetMapping("/filmes")
 	public List<Filme> listaFilme(){
@@ -26,6 +30,7 @@ public class FilmeController {
 	public Filme listaFilmeUnico(@PathVariable(value= "id")long id ) {
 			return filmeService.listaFilmeUnico(id);
 	}
+	
 
 	@PostMapping("/filme")
 	public Filme salvaFilme(@RequestBody Filme filme) {
@@ -40,6 +45,9 @@ public class FilmeController {
 	@PutMapping("/filme")
 	public Filme atualizaFilme(@RequestBody Filme filme) {
 		return filmeService.atualizaFilme(filme);
-	}
+	}	
+	
+	
+	
 }
  

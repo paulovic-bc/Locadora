@@ -1,6 +1,5 @@
 package com.locadora.Locadora.models;
 
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -10,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,38 +17,33 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @Entity
-@Table(name="TB_FILME")
+@Table(name="TB_Usuario")
+public class Usuario  implements Serializable{
 
-public class Filme implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="Id")
+	@Column(name = "Id")
 	public long id;
 	
-	@Column(name = "titulo",nullable = false)
-	public String titulo_filme;
+	@Column(name = "CPF",nullable = false)
+	public String cpf_usuario;
 	
-	@Column(name="Sinopse", nullable = false)
-	public String sinopse_filme;
+	@Column(name = "Telefone",nullable = false)
+	public String telefone_usuario;
 	
-	@Column(name="Imagem", nullable = false)
-	public String imagem_filme;
+	@Column(name = "email",nullable = false)
+	public String email_usuario;
 	
-	@Column(name = "data_lancamento",nullable = false)
-	public String data_lascamento;
+	@Column(name = "Senha",nullable = false)
+	public String senha_usuario;
 	
-	@Column(name = "Duracao",nullable = false)
-	public String duracao_filme;
+	@Column(name = "Perfil",nullable = false)
+	public String perfil_usuario;
 	
-	@Column(name = "Idioma",nullable = false)
-	public String idioma_filme;
-
-
 	@ManyToOne
-	public Categoria categoria;
-	
-
+	public Idioma idioma;
 }
+  

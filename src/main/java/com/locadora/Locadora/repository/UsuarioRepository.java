@@ -1,15 +1,11 @@
 package com.locadora.Locadora.repository;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.locadora.Locadora.models.Filme;
+import com.locadora.Locadora.models.Usuario;
 @Repository
-public interface FilmeRepository extends JpaRepository<Filme,Long> {
-	
-	Filme findById(long id);
-	
-	
 
-
+public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
+	Usuario findById(long id);
 	
-
 }
