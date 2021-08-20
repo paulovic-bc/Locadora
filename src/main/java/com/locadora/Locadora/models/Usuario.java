@@ -45,5 +45,6 @@ public class Usuario  implements Serializable{
 	
 	@ManyToOne
 	public Idioma idioma;
+	
 }
   
