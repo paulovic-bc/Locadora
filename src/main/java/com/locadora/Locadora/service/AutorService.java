@@ -1,10 +1,10 @@
 package com.locadora.Locadora.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.locadora.Locadora.models.Autor;
 import com.locadora.Locadora.repository.AutorRepository;
@@ -17,9 +17,10 @@ public class AutorService {
 		return autorRepository.findAll();
 	}
 	
-	public Autor listaCategoriaUnico(@PathVariable(value= "id")long id ) {
-			return autorRepository.findById(id);
+	public Optional<Autor > findOne(long id) {
+		return autorRepository.findById(id);
 	}
+		
 	
 	public Autor saveAutor(@RequestBody Autor autor) {
 		return autorRepository.save(autor);
@@ -34,5 +35,5 @@ public class AutorService {
 		return autorRepository.save(autor);
 	}
 
-
+	
 }

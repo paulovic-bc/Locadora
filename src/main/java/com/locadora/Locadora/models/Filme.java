@@ -49,6 +49,8 @@ public class Filme implements Serializable{
 
 	@ManyToOne
 	public Categoria categoria;
-	
+	@ManyToOne
+	public Idioma idioma;
+
 
 }

@@ -1,6 +1,7 @@
 package com.locadora.Locadora.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,10 +26,7 @@ public class CategoriaController {
 	public List<Categoria> listaCategoria(){
 		return categoriaService.listaCategoria();
 	}
-	@GetMapping("/categoria/{id}")
-	public Categoria listaCategoriaUnico(@PathVariable(value= "id")long id ) {
-			return categoriaService.listaCategoriaUnico(id);
-	}
+	
 
 	@PostMapping("/categoria")
 	public Categoria salvaCategoria(@RequestBody Categoria categoria) {
@@ -42,6 +40,10 @@ public class CategoriaController {
 	@PutMapping("/categoria")
 	public Categoria atualizaCategoria(@RequestBody Categoria categoria) {
 		return categoriaService.atualizaCategoria(categoria);
+	}
+	@GetMapping("/categorias/{id}")
+	public Optional<Categoria> listaCategoriaUnico(@PathVariable(value= "id")long id ) {
+		return categoriaService.listaCategoriaUnico(id);
 	}
 	
 }

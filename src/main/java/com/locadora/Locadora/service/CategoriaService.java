@@ -1,6 +1,8 @@
 package com.locadora.Locadora.service;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +18,8 @@ public class CategoriaService {
 	public List<Categoria> listaCategoria(){
 		return categoriaRepository.findAll();
 	}
-	
-	public Categoria listaCategoriaUnico(@PathVariable(value= "id")long id ) {
-			return categoriaRepository.findById(id);
+	public Optional<Categoria> findOne(long id){
+		return categoriaRepository.findById(id);
 	}
 
 	
@@ -33,5 +34,8 @@ public class CategoriaService {
 	
 	public Categoria atualizaCategoria(@RequestBody Categoria categoria) {
 		return categoriaRepository.save(categoria);
+	}
+	public Optional<Categoria> listaCategoriaUnico(@PathVariable(value= "id")long id ) {
+		return categoriaRepository.findById(id);
 	}
 }
