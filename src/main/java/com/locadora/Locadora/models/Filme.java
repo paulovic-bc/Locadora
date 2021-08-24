@@ -43,8 +43,7 @@ public class Filme implements Serializable{
 	@Column(name = "Duracao",nullable = false)
 	public String duracao_filme;
 	
-	@Column(name = "Idioma",nullable = false)
-	public String idioma_filme;
+	
 
 
 	@ManyToOne

@@ -21,7 +21,7 @@ public class AutorController {
 	@Autowired
 	AutorService autorService;
 	@GetMapping("/autores")
-	public List<Autor> listaCategoria(){
+	public List<Autor> listaAUtor(){
 		return autorService.listaCategoria();
 	}
 	

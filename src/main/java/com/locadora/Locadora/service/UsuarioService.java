@@ -1,11 +1,13 @@
 package com.locadora.Locadora.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+
 import com.locadora.Locadora.models.Usuario;
 import com.locadora.Locadora.repository.UsuarioRepository;
 
@@ -18,9 +20,8 @@ public class UsuarioService {
 	public List<Usuario> listaUsuario(){
 			return usuarioRepository.findAll();
 	}
-	public Usuario listaUsuarioUnico(@PathVariable(value= "id")long id ) {
-			return usuarioRepository.findById(id);	
-			
+	public Optional<Usuario> listaUsuarioUnico(@PathVariable(value= "id")long id ) {
+		return usuarioRepository.findById(id);
 	}
 	
 	

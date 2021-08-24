@@ -1,6 +1,7 @@
 package com.locadora.Locadora.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,10 +26,10 @@ public class UsuarioController {
 		return usuarioService.listaUsuario();
 	}
 	@GetMapping("/Usuario/{id}")
-	public Usuario listaUsuarioUnico(@PathVariable(value= "id")long id ) {
-		return usuarioService.listaUsuarioUnico(id);	
-		
+	public Optional<Usuario> listaUsuarioUnico(@PathVariable(value= "id")long id ) {
+		return usuarioService.listaUsuarioUnico(id);
 	}
+	
 	@PostMapping("/Usuario")
 	public Usuario salvaUsuario(@RequestBody Usuario usuario) {
 			return usuarioService.salvaUsuario(usuario);

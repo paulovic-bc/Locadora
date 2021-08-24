@@ -33,9 +33,7 @@ public class Categoria implements Serializable {
 
 		@Column(name="Tag", nullable = false)
 		public String tag_categoria;
-		
-		@Column(name="Idioma", nullable = false)
-		public String idioma_categoria;
+	
 
 		@ManyToOne
 		public Idioma idioma;
