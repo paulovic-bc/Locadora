@@ -1,6 +1,7 @@
 package com.locadora.Locadora.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.locadora.Locadora.service.FilmeService;
 import com.locadora.Locadora.models.Filme;
+
 
 @RestController
 @RequestMapping(value="/api")

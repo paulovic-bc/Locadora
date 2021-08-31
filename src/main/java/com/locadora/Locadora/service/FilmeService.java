@@ -28,6 +28,10 @@ public class FilmeService {
 			return filmeRepository.findAll();
 		}
 		
+		public Optional<Filme> listaFilmeUnico(@PathVariable(value= "id")long id ) {
+			return filmeRepository.findById(id);
+		}
+		
 	
 		public Filme salvaFilme(@RequestBody Filme filme) {
 			return filmeRepository.save(filme);
@@ -55,10 +59,7 @@ public class FilmeService {
 	        return lista;
 	        
 	    }
-		
-		public Optional<Filme> listaFilmeUnico(@PathVariable(value= "id")long id ) {
-			return filmeRepository.findById(id);
-		}
+	
 		
 	}
 

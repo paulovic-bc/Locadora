@@ -1,9 +1,5 @@
 package com.locadora.Locadora.models;
-
-
-
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,9 +30,8 @@ public class Categoria implements Serializable {
 		@Column(name="Tag", nullable = false)
 		public String tag_categoria;
 	
-
 		@ManyToOne
 		public Idioma idioma;
-
 	}
+
 
