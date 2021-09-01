@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+
+
 import com.locadora.Locadora.models.Categoria;
 import com.locadora.Locadora.models.Filme;
 import com.locadora.Locadora.repository.FilmeRepository;
@@ -55,8 +57,9 @@ public class FilmeService {
 	        List<Filme> lista = new ArrayList<Filme>();
 	        if(categoria.isPresent()){
 	        	lista = filmeRepository.findByCategoria(categoria.get());
+	        	return lista;
 	        }
-	        return lista;
+	        return null;
 	        
 	    }
 	
