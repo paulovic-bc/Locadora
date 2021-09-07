@@ -18,18 +18,18 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @Entity
-@Table(name="TB_Idioma")
-public class Idioma implements  Serializable {
-	
+@Table(name = "TB_Idioma")
+public class Idioma implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	public long id;	
-	
-	@Column(name = "Nome",nullable = false)
+	public long id;
+
+	@Column(name = "Nome", nullable = false)
 	public String nome_idioma;
-	
-	@Column(name = "Tag",nullable = false)
+
+	@Column(name = "Tag", nullable = false)
 	public String tag_idioma;
 }

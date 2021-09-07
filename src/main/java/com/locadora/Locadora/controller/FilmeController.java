@@ -19,61 +19,103 @@ import org.springframework.web.bind.annotation.RestController;
 import com.locadora.Locadora.service.FilmeService;
 import com.locadora.Locadora.models.Filme;
 
-
 @RestController
-@RequestMapping(value="/api")
+@RequestMapping(value = "/api")
 public class FilmeController {
 
 	@Autowired
-	FilmeService  filmeService;
-	
+	FilmeService filmeService;
+
 	@GetMapping("/filmes")
-	public List<Filme> listaFilme(){
-		return filmeService.listaFilme();
+	public ResponseEntity<?> listaFilme() {
+		try {
+			List<Filme> filme = filmeService.listaFilme();
+			if (filme.isEmpty()) {
+				throw new Exception("Erro desconhecido");
+			}
+
+			return new ResponseEntity<List<Filme>>(filme, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
 
 	@PostMapping("/filme")
-	public Filme salvaFilme(@RequestBody Filme filme) {
-		return filmeService.salvaFilme(filme);
+	public ResponseEntity<?> salvaFilme(@RequestBody Filme filme) {
+		try {
+			Filme filmesave = filmeService.salvaFilme(filme);
+			return new ResponseEntity<Filme>(filmesave, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("Erro ao salvar filme", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
-	@DeleteMapping("/filme")
-	public String deleteFilme(@RequestBody Filme filme) {
-	 filmeService.deleteFilme(filme);
-	 return "deletado com sucesso";
+
+	@DeleteMapping("/filme/{id}")
+	public ResponseEntity<String> deleteFilme(@PathVariable(value = "id") long id) {
+		try {
+			filmeService.deleteFilme(id);
+			return new ResponseEntity<String>("Filme de id" + id + "excluido com sucesso", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("Erro ao Excluir", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-	
+
 	@PutMapping("/filme")
-	public Filme atualizaFilme(@RequestBody Filme filme) {
-		return filmeService.atualizaFilme(filme);
+	public ResponseEntity<?> atualizaFilme(@RequestBody Filme filme) {
+		try {
+			Filme filmeAtt = filmeService.atualizaFilme(filme);
+			return new ResponseEntity<Filme>(filmeAtt, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("erro ao atualizar filme", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-	
+
 	@GetMapping("/filmeName/{filme}")
-    @ResponseBody
-    public List<Filme> getFilme(@PathVariable(value= "filme") String filme){
-        return filmeService.findByName(filme);
-    }
+	@ResponseBody
+	public ResponseEntity<?> getFilme(@PathVariable(value = "filme") String filme) {
+		try {
+			List<Filme> filmeName = filmeService.findByName(filme);
+			if (filmeName.isEmpty()) {
+				throw new Exception("Filme não encontrado");
+			}
+			return new ResponseEntity<List<Filme>>(filmeName, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+
+	}
+
 	@GetMapping("/filme/buscaCategoria/{id}")
 	@ResponseBody
-	public ResponseEntity<?>findByCategoria(@PathVariable(value= "id") long id){
+	public ResponseEntity<?> findByCategoria(@PathVariable(value = "id") long id) {
 		try {
 			List<Filme> filme = filmeService.findByCategoria(id);
-			if(filme == null) {
-				return new ResponseEntity<String>("Categoria não existente",HttpStatus.NOT_FOUND);
+			if (filme == null) {
+				return new ResponseEntity<String>("Categoria não existente", HttpStatus.NOT_FOUND);
 			}
-			return new ResponseEntity<List<Filme>>(filme,HttpStatus.OK);
+			return new ResponseEntity<List<Filme>>(filme, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
 		}
-		
+
 	}
+
 	@GetMapping("/filmeId/{id}")
-	public Optional<Filme> listaFilmeUnico(@PathVariable(value= "id")long id ) {
-		return filmeService.listaFilmeUnico(id);
+	public ResponseEntity<?> listaFilmeUnico(@PathVariable(value = "id") long id) {
+
+		try {
+			Optional<Filme> filme = filmeService.listaFilmeUnico(id);
+			if (filme.isEmpty()) {
+				throw new Exception("filme não existe");
+			}
+			return new ResponseEntity<Optional<Filme>>(filme, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("filme não encontrado", HttpStatus.NOT_FOUND);
+
+		}
+
 	}
-	
 }
-	
-
-
- 

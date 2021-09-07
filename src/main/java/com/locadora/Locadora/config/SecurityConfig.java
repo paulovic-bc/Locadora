@@ -1,6 +1,5 @@
 
- package com.locadora.Locadora.config;
-
+package com.locadora.Locadora.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,56 +19,53 @@ import com.locadora.Locadora.repository.UsuarioRepository;
 import com.locadora.Locadora.service.AutentificacaoService;
 import com.locadora.Locadora.service.TokenService;
 
-
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	AutentificacaoService autentificacaoService;
 	@Autowired
 	TokenService tokenService;
-	
+
 	@Autowired
 	UsuarioRepository usuarioRepository;
-	
+
 	@Override
 	@Bean
 	protected AuthenticationManager authenticationManager() throws Exception {
 		// TODO Auto-generated method stub
 		return super.authenticationManager();
 	}
-	
-	//config autentificacao
+
+	// config autentificacao
 	@Override
-	
+
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-	 auth.userDetailsService(autentificacaoService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(autentificacaoService).passwordEncoder(new BCryptPasswordEncoder());
 	}
-	
-	//config Autorizacao
+
+	// config Autorizacao
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	
-		http.authorizeRequests()
-		.antMatchers(HttpMethod.GET,"/api/filmes").permitAll()
-		.antMatchers(HttpMethod.GET,"/api/filmeId/*").permitAll()
-		.antMatchers(HttpMethod.GET,"/api/filmeName/*").permitAll()
-		.antMatchers(HttpMethod.GET,"/api/categorias").permitAll()
-		.antMatchers(HttpMethod.POST,"/api/auth").permitAll()
-		.antMatchers(HttpMethod.GET,"/actuator/**").permitAll()
-		.anyRequest().authenticated()
-		.and().csrf().disable()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService,usuarioRepository), UsernamePasswordAuthenticationFilter.class);
-					
+
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/filmes").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/filmeId/*").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/filmeName/*").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/categorias").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/categoriaId/*").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/auth")
+				.permitAll().antMatchers(HttpMethod.GET, "/actuator/**").permitAll().anyRequest().authenticated().and()
+				.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository),
+						UsernamePasswordAuthenticationFilter.class);
+
 	}
-	//config recursos  estaticos(js,css,imgs)
+
+	// config recursos estaticos(js,css,imgs)
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-	    web.ignoring()
-	        .antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");
+		web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**",
+				"/swagger-resources/**");
 	}
-		
+
 }
-
-

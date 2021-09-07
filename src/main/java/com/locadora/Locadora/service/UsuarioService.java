@@ -14,27 +14,27 @@ import com.locadora.Locadora.repository.UsuarioRepository;
 @Service
 
 public class UsuarioService {
-		@Autowired
-		UsuarioRepository usuarioRepository;
-		
-	public List<Usuario> listaUsuario(){
-			return usuarioRepository.findAll();
+	@Autowired
+	UsuarioRepository usuarioRepository;
+
+	public List<Usuario> listaUsuario() {
+		return usuarioRepository.findAll();
 	}
-	public Optional<Usuario> listaUsuarioUnico(@PathVariable(value= "id")long id ) {
+
+	public Optional<Usuario> listaUsuarioUnico(@PathVariable(value = "id") long id) {
 		return usuarioRepository.findById(id);
 	}
-	
-	
+
 	public Usuario salvaUsuario(@RequestBody Usuario usuario) {
-			return usuarioRepository.save(usuario);
+		return usuarioRepository.save(usuario);
 	}
-	
-	public String deleteUsuario(@RequestBody Usuario usuario) {
-		usuarioRepository.delete(usuario);
-		return "deletado com sucesso";
+
+	public void deleteUsuario(Long id) {
+		usuarioRepository.deleteById(id);
+		;
+
 	}
-	
-	
+
 	public Usuario atualizaUsuario(@RequestBody Usuario usuario) {
 		return usuarioRepository.save(usuario);
 	}

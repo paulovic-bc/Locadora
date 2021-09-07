@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,32 +19,72 @@ import com.locadora.Locadora.models.Usuario;
 import com.locadora.Locadora.service.UsuarioService;
 
 @RestController
-@RequestMapping(value ="/api" )
+@RequestMapping(value = "/api")
 public class UsuarioController {
 	@Autowired
-	UsuarioService  usuarioService;
+	UsuarioService usuarioService;
+
 	@GetMapping("/Usuarios")
-	public List<Usuario> listaUsuario(){
-		return usuarioService.listaUsuario();
+	public ResponseEntity<?> listaUsuario() {
+		try {
+			List<Usuario> user = usuarioService.listaUsuario();
+			if (user.isEmpty()) {
+				throw new Exception("Usuario não encontrada");
+			}
+			return new ResponseEntity<List<Usuario>>(user, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+
 	}
+
 	@GetMapping("/Usuario/{id}")
-	public Optional<Usuario> listaUsuarioUnico(@PathVariable(value= "id")long id ) {
-		return usuarioService.listaUsuarioUnico(id);
+	public ResponseEntity<?> listaUsuarioUnico(@PathVariable(value = "id") long id) {
+		try {
+			Optional<Usuario> userId = usuarioService.listaUsuarioUnico(id);
+			if (userId.isEmpty()) {
+				throw new Exception("Usuario não encontrada");
+			}
+			return new ResponseEntity<Optional<Usuario>>(userId, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+
 	}
-	
+
 	@PostMapping("/Usuario")
-	public Usuario salvaUsuario(@RequestBody Usuario usuario) {
-			return usuarioService.salvaUsuario(usuario);
+	public ResponseEntity<?> salvaUsuario(@RequestBody Usuario usuario) {
+		try {
+			Usuario userSave = usuarioService.salvaUsuario(usuario);
+			return new ResponseEntity<Usuario>(userSave, HttpStatus.OK);
+
+		} catch (Exception e) {
+			return new ResponseEntity<String>("erro ao salvar usuario", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
+
 	@DeleteMapping("/Usuario")
 
-	public String deleteUsuario(@RequestBody Usuario usuario) {
-		usuarioService.deleteUsuario(usuario);
-		return "deletado com sucesso";
+	public ResponseEntity<?> deleteUsuario(@PathVariable(value = "id") Long id) {
+		try {
+			usuarioService.deleteUsuario(id);
+			return new ResponseEntity<String>("Usuario de id" + id + "excluido com sucesso", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("Erro ao delesta Usuario", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
+
 	@PutMapping("/Usuario")
-	public Usuario atualizaUsuario(@RequestBody Usuario usuario) {
-		return usuarioService.atualizaUsuario(usuario);
+	public ResponseEntity<?> atualizaUsuario(@RequestBody Usuario usuario) {
+		try {
+			Usuario userAtt = usuarioService.atualizaUsuario(usuario);
+			return new ResponseEntity<Usuario>(userAtt, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("erro ao atualizar usuario", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
-	
+
 }

@@ -27,9 +27,9 @@ public class CategoriaService {
 		return categoriaRepository.save(categoria);
 	}
 	
-	public String deleteCategoria(@RequestBody Categoria categoria) {
-		categoriaRepository.delete(categoria);
-		return "Categoria deletada com sucesso";
+	public void deleteCategoria(long id) {
+		categoriaRepository.deleteById(id);
+		
 	}
 	
 	public Categoria atualizaCategoria(@RequestBody Categoria categoria) {
