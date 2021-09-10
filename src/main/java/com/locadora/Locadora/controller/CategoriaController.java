@@ -3,6 +3,8 @@ package com.locadora.Locadora.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +42,7 @@ public class CategoriaController {
 	}
 
 	@PostMapping("/categoria")
-	public ResponseEntity<?> salvaCategoria(@RequestBody Categoria categoria) {
+	public ResponseEntity<?> salvaCategoria(@RequestBody @Valid Categoria categoria) {
 		try {
 			Categoria catSave = categoriaService.salvaCategoria(categoria);
 			return new ResponseEntity<Categoria>(catSave, HttpStatus.OK);
@@ -54,7 +56,7 @@ public class CategoriaController {
 	public ResponseEntity<?> deleteCategoria(@PathVariable(value = "id") Long id) {
 		try {
 			categoriaService.deleteCategoria(id);
-			return new ResponseEntity<String>("Categoria de id" + id + "excluido com sucesso", HttpStatus.OK);
+			return new ResponseEntity<String>("Categoria de id" + id + " excluido com sucesso", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>("Erro desconhecido", HttpStatus.INTERNAL_SERVER_ERROR);
 		}

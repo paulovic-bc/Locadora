@@ -4,6 +4,8 @@ import java.util.List;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +44,7 @@ public class FilmeController {
 	}
 
 	@PostMapping("/filme")
-	public ResponseEntity<?> salvaFilme(@RequestBody Filme filme) {
+	public ResponseEntity<?> salvaFilme(@RequestBody @Valid Filme filme) {
 		try {
 			Filme filmesave = filmeService.salvaFilme(filme);
 			return new ResponseEntity<Filme>(filmesave, HttpStatus.OK);
@@ -56,14 +58,14 @@ public class FilmeController {
 	public ResponseEntity<String> deleteFilme(@PathVariable(value = "id") long id) {
 		try {
 			filmeService.deleteFilme(id);
-			return new ResponseEntity<String>("Filme de id" + id + "excluido com sucesso", HttpStatus.OK);
+			return new ResponseEntity<String>("Filme de id" + id + " excluido com sucesso", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>("Erro ao Excluir", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	@PutMapping("/filme")
-	public ResponseEntity<?> atualizaFilme(@RequestBody Filme filme) {
+	public ResponseEntity<?> atualizaFilme(@RequestBody @Valid Filme filme) {
 		try {
 			Filme filmeAtt = filmeService.atualizaFilme(filme);
 			return new ResponseEntity<Filme>(filmeAtt, HttpStatus.OK);

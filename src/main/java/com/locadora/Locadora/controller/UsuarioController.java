@@ -3,6 +3,8 @@ package com.locadora.Locadora.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +55,7 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/Usuario")
-	public ResponseEntity<?> salvaUsuario(@RequestBody Usuario usuario) {
+	public ResponseEntity<?> salvaUsuario(@RequestBody @Valid Usuario usuario) {
 		try {
 			Usuario userSave = usuarioService.salvaUsuario(usuario);
 			return new ResponseEntity<Usuario>(userSave, HttpStatus.OK);
@@ -69,7 +71,7 @@ public class UsuarioController {
 	public ResponseEntity<?> deleteUsuario(@PathVariable(value = "id") Long id) {
 		try {
 			usuarioService.deleteUsuario(id);
-			return new ResponseEntity<String>("Usuario de id" + id + "excluido com sucesso", HttpStatus.OK);
+			return new ResponseEntity<String>("Usuario de id" + id + " excluido com sucesso", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>("Erro ao delesta Usuario", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -77,7 +79,7 @@ public class UsuarioController {
 	}
 
 	@PutMapping("/Usuario")
-	public ResponseEntity<?> atualizaUsuario(@RequestBody Usuario usuario) {
+	public ResponseEntity<?> atualizaUsuario(@RequestBody @Valid Usuario usuario) {
 		try {
 			Usuario userAtt = usuarioService.atualizaUsuario(usuario);
 			return new ResponseEntity<Usuario>(userAtt, HttpStatus.OK);
