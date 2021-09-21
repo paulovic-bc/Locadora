@@ -34,23 +34,27 @@ public class Filme implements Serializable {
 	public long id;
 
 	@Column(name = "titulo", nullable = false)
-	@NotBlank @NotEmpty
-	public String titulo_filme; 
+	@NotBlank
+	@NotEmpty
+	public String titulo_filme;
 
 	@Column(name = "Sinopse", nullable = false)
-	@NotBlank @NotEmpty
+	@NotBlank
+	@NotEmpty
 	public String sinopse_filme;
 
 	@Column(name = "Imagem", nullable = false)
-	@NotBlank @NotEmpty
+
 	public String imagem_filme;
 
 	@Column(name = "data_lancamento", nullable = false)
-	@NotBlank @NotEmpty
-	public String data_lascamento;
+	@NotBlank
+	@NotEmpty
+	public String data_lancamento;
 
 	@Column(name = "Duracao", nullable = false)
-	@NotBlank @NotEmpty
+	@NotBlank
+	@NotEmpty
 	public String duracao_filme;
 
 	@ManyToOne

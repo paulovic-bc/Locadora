@@ -89,7 +89,7 @@ public class FilmeController {
 
 	}
 
-	@GetMapping("/filme/buscaCategoria/{id}")
+	@GetMapping("/filmeBCat/{id}")
 	@ResponseBody
 	public ResponseEntity<?> findByCategoria(@PathVariable(value = "id") long id) {
 		try {
